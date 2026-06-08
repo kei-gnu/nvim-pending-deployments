@@ -532,6 +532,8 @@ function M.setup(opts)
   M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 
   vim.api.nvim_create_user_command("PendingDeployments", function() M.open() end, { desc = "Review pending deployments" })
+  -- short alias (`:PendingDeployments` is a mouthful)
+  vim.api.nvim_create_user_command("Pending", function() M.open() end, { desc = "Review pending deployments (alias)" })
 
   if vim.fn.executable "gh" ~= 1 or #M.config.repos == 0 then
     -- no gh / no repos configured: don't poll (the command still exists)

@@ -33,6 +33,7 @@ COMMANDS                                        *pending-deployments-commands*
 
                                                         *:PendingDeployments*
 :PendingDeployments	Open the panel listing runs awaiting review.
+:Pending		Short alias for :PendingDeployments.
 
 Inside the panel (cursor on a run's block):
 	a	approve the run's approvable environments

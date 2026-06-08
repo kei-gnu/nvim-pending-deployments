@@ -117,7 +117,7 @@ diff = {
 
 ## Usage
 
-- `:PendingDeployments` — open the panel.
+- `:PendingDeployments` (or the short alias `:Pending`) — open the panel.
 - Inside the panel (cursor on a run's block):
 
   | key | action |
