@@ -1,0 +1,53 @@
+*pending-deployments.txt*	Review GitHub Actions pending deployments in Neovim
+
+==============================================================================
+INTRODUCTION                                       *pending-deployments-intro*
+
+nvim-pending-deployments lets you review GitHub Actions pending deployments —
+the approval gate from an environment's "required reviewers" protection rule —
+without leaving Neovim. It polls for runs waiting on approval, shows the
+environments and CI status, and lets you approve or reject in place.
+
+Requires the `gh` CLI, authenticated. Neovim >= 0.10.
+
+==============================================================================
+SETUP                                              *pending-deployments-setup*
+
+>lua
+    require("pending-deployments").setup({
+      repos = { "owner/repo" },
+      environments = {}, -- restrict to these environment names (empty = all)
+      poll_interval = 60,
+      initial_delay = 10,
+      approval_job_pattern = nil,
+      diff = {
+        job_filter = nil, -- fun(job): boolean
+        extract = function(raw) return vim.split(raw, "\n", { plain = true }) end,
+        syntax = "diff",
+      },
+    })
+<
+
+==============================================================================
+COMMANDS                                        *pending-deployments-commands*
+
+                                                        *:PendingDeployments*
+:PendingDeployments	Open the panel listing runs awaiting review.
+
+Inside the panel (cursor on a run's block):
+	a	approve the run's approvable environments
+	r	reject
+	d	show the diff view (if configured)
+	o	open the run in the browser
+	R	refetch
+	q, <Esc>	close
+
+==============================================================================
+FUNCTIONS                                      *pending-deployments-functions*
+
+require("pending-deployments").open()
+require("pending-deployments").close_all()	Close panel/diff windows and
+					buffers. Call from a session manager's
+					pre-save hook.
+
+ vim:tw=78:ts=8:ft=help:norl:
